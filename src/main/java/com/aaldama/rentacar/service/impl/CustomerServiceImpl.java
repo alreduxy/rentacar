@@ -1,5 +1,6 @@
 package com.aaldama.rentacar.service.impl;
 
+import com.aaldama.rentacar.exception.ModeloNotFoundException;
 import com.aaldama.rentacar.model.Customer;
 import com.aaldama.rentacar.repo.CustomerRepo;
 import com.aaldama.rentacar.service.CustomerService;
@@ -18,21 +19,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        return customerRepo.findAll();
     }
 
     @Override
-    public Customer findById(Integer id) {
-        return null;
+    public Customer findById(Long id) {
+        return customerRepo.findById(id).orElse(null);
     }
 
     @Override
     public Customer save(Customer customer) {
-        return null;
+        return customerRepo.save(customer);
     }
 
     @Override
-    public void delete(Integer id) {
-
+    public void delete(Long id) {
+        customerRepo.deleteById(id);
     }
 }

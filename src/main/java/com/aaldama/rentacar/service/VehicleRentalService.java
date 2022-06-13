@@ -8,6 +8,6 @@ import java.util.List;
 public interface VehicleRentalService {
 
     public List<RentACarDto> listarVehiculosRentados();
-    public List<RentACarDto> listarVehiculosRentadosPorUsuario(Integer user_id);
+    public List<RentACarDto> listarVehiculosRentadosPorUsuario(Long customer_id);
 
 }

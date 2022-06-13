@@ -3,6 +3,7 @@ package com.aaldama.rentacar.controller;
 import com.aaldama.rentacar.model.Manufacturer;
 import com.aaldama.rentacar.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,17 +13,20 @@ import java.util.List;
 public class ManufacturerController {
 
     @Autowired
-    private ManufacturerService manufacturerService;
+    private final ManufacturerService manufacturerService;
 
-    @GetMapping("/all")
-    public List<Manufacturer> index() {
-        return manufacturerService.findAll();
+    public ManufacturerController(ManufacturerService manufacturerService) {
+        this.manufacturerService = manufacturerService;
     }
 
+    @GetMapping
+    public ResponseEntity<?> findAll() {
+        return new ResponseEntity<>(manufacturerService.findAll(), org.springframework.http.HttpStatus.OK);
+    }
 
-    @PostMapping("/save")
-    public Manufacturer save(Manufacturer manufacturer) {
-        return manufacturerService.save(manufacturer);
+    @GetMapping("/{id}")
+    public ResponseEntity<Manufacturer> findById(@PathVariable ("id") Integer id) {
+        return new ResponseEntity<>(manufacturerService.findById(id), org.springframework.http.HttpStatus.OK);
     }
 
 

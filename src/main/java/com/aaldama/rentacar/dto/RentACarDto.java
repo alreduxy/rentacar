@@ -14,7 +14,6 @@ public class RentACarDto implements Serializable {
     private static final long serialVersionUID = 2722897638402547421L;
 
     private String fullName;
-    private String idCard;
     private String email;
     private String locationName;
     private String vehicleTypeDescription;

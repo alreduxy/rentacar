@@ -26,10 +26,10 @@ public class VehicleRentalsController {
         return new ResponseEntity<List<RentACarDto>>(lista, HttpStatus.OK);
     }
 
-    @GetMapping("/listar-rentados-por-usuario/{user_id}")
-    public ResponseEntity<List<RentACarDto>> listarVehiculosRentadosPorUsuario(@PathVariable ("user_id") Integer user_id) {
+    @GetMapping("/listar-rentados/{customer_id}")
+    public ResponseEntity<List<RentACarDto>> listarVehiculosRentadosPorUsuario(@PathVariable ("customer_id") Long customer_id) {
         List<RentACarDto> lista = new ArrayList<>();
-        lista = vehicleRentalService.listarVehiculosRentadosPorUsuario(user_id);
+        lista = vehicleRentalService.listarVehiculosRentadosPorUsuario(customer_id);
         return new ResponseEntity<List<RentACarDto>>(lista, HttpStatus.OK);
     }
 
