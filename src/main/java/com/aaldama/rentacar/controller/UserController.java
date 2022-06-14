@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @ApiOperation(value = "Obtener todos los Usuario existentes",
             notes = "No necesita parametros de entrada",

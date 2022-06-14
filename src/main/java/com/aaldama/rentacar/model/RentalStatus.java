@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -21,6 +22,7 @@ public class RentalStatus implements Serializable {
     @Column(name = "rental_status")
     private Integer id;
 
+    @NotNull
     @Column(name = "rental_status_desc")
     private String rentalStatusDescription;
 

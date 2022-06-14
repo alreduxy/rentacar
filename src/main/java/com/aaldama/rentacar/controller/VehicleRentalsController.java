@@ -2,6 +2,7 @@ package com.aaldama.rentacar.controller;
 
 import com.aaldama.rentacar.dto.RentACarDto;
 import com.aaldama.rentacar.service.VehicleRentalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +14,9 @@ import java.util.List;
 @RequestMapping("/vehicles")
 public class VehicleRentalsController {
 
-   private final VehicleRentalService vehicleRentalService;
+    private final VehicleRentalService vehicleRentalService;
 
+    @Autowired
     public VehicleRentalsController(VehicleRentalService vehicleRentalService) {
         this.vehicleRentalService = vehicleRentalService;
     }

@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -21,9 +23,11 @@ public class Location implements Serializable {
     @Column(name = "location_id")
     private Integer id;
 
+    @NotNull
     @Column(name = "location_zip_code")
     private Integer locationCode;
 
+    @NotNull
     @Column(name = "location_name")
     private String locationName;
 }

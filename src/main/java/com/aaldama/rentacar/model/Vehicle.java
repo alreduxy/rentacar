@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -25,14 +26,17 @@ public class Vehicle implements Serializable {
     @Column(name = "vehicle_id")
     private Integer id;
 
+    @NotNull
     @Column(name = "current_km")
     private Integer currentKilometers;
 
+    @NotNull
     @JsonFormat(pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     @Column(name = "due_date")
     private Date dateMotDue;
 
+    @NotNull
     @Column(name = "full_tank")
     private Boolean fullTank;
 
@@ -40,6 +44,7 @@ public class Vehicle implements Serializable {
     public void prePersist() { this.dateMotDue = new Date();
     }
 
+    @NotNull
     @Column(name = "engine_size")
     private Double engineSize;
 

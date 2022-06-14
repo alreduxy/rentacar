@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    @Autowired
     private final VehicleRepo vehicleRepo;
 
+    @Autowired
     public VehicleServiceImpl(VehicleRepo vehicleRepo) {
         this.vehicleRepo = vehicleRepo;
     }

@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
@@ -47,16 +48,15 @@ public class User implements Serializable {
     @Column(name = "enabled", nullable = false)
     private Boolean enabled;
 
+    @NotNull
     @Column(name = "first_name", length = 50)
     private String firstName;
 
+    @NotNull
     @Column(name = "last_name", length = 50)
     private String lastName;
 
-    @Column(name = "id_card", unique = true)
-    @Size(min = 9, max = 10)
-    private String idCard;
-
+    @Email
     @Column(unique = true)
     private String email;
 

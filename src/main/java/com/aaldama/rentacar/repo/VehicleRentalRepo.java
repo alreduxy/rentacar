@@ -4,9 +4,11 @@ import com.aaldama.rentacar.model.VehicleRental;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface VehicleRentalRepo extends JpaRepository<VehicleRental, Integer> {
 
     @Query(value = "SELECT " + "CONCAT(CU.FIRST_NAME, ' ', CU.LAST_NAME) AS FULL_NAME, " +

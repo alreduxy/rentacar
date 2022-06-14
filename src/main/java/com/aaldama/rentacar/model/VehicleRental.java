@@ -25,6 +25,22 @@ public class VehicleRental implements Serializable {
     @Column(name = "vehicle_rental_id")
     private Integer id;
 
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @Column(name = "date_from")
+    @Temporal(TemporalType.DATE)
+    private Date dateFrom;
+
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @Column(name = "date_to")
+    @Temporal(TemporalType.DATE)
+    private Date dateTo;
+
+    @PrePersist
+    public void prePersist() {
+        this.dateFrom = new Date();
+        this.dateTo = new Date();
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false, foreignKey = @ForeignKey(name = "fk_vehicle_rental_customer"))
     private Customer customer;
@@ -37,26 +53,6 @@ public class VehicleRental implements Serializable {
     @ManyToOne
     @JoinColumn(name="vehicle_id", nullable=false, foreignKey = @ForeignKey(name = "fk_vehicle_id"))
     private Vehicle vehicle;
-
-
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @Column(name = "date_from")
-    @Temporal(TemporalType.DATE)
-    private Date dateFrom;
-
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @Column(name = "date_to")
-    @Temporal(TemporalType.DATE)
-    private Date dateTo;
-
-
-
-
-    @PrePersist
-    public void prePersist() {
-        this.dateFrom = new Date();
-        this.dateTo = new Date();
-    }
 
     @Column(name = "quantity_days")
     private Integer quantityDays;

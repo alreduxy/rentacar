@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -21,6 +22,7 @@ public class Role implements Serializable {
     @Column(name = "rol_id")
     private Long id;
 
+    @NotNull
     @Column(unique = true, length = 20)
     private String name;
 }

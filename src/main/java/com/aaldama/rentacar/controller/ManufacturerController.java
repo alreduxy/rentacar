@@ -12,9 +12,9 @@ import java.util.List;
 @RequestMapping("/manufacturers")
 public class ManufacturerController {
 
-    @Autowired
     private final ManufacturerService manufacturerService;
 
+    @Autowired
     public ManufacturerController(ManufacturerService manufacturerService) {
         this.manufacturerService = manufacturerService;
     }
