@@ -3,13 +3,14 @@ package com.aaldama.rentacar.service;
 import com.aaldama.rentacar.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomerService {
 
-    public List<Customer> findAll();
-    public Customer findById(Long id);
-    public Customer save(Customer customer);
-    public Customer update(Customer customer);
-    public void delete(Long id);
+    List<Customer> findAll();
+    Optional<Customer> findById(Long id);
+    Customer save(Customer customer);
+    Customer update(Customer customer);
+    void delete(Long id);
 
 }

@@ -6,6 +6,7 @@ import com.aaldama.rentacar.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,28 +23,32 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Manufacturer> findAll() {
           return manufacturerRepo.findAll();
     }
 
     @Override
-    public Manufacturer findById(Integer id) {
-        Optional<Manufacturer> manufacturer = manufacturerRepo.findById(id);
-        return manufacturer.orElseThrow(() -> new UsernameNotFoundException(String.format("Manufacturer does not exist", id)));
+    @Transactional(readOnly = true)
+    public Optional<Manufacturer> findById(Integer id) {
+        return manufacturerRepo.findById(id);
     }
 
     @Override
+    @Transactional
     public Manufacturer save(Manufacturer manufacturer) {
-        return null;
+        return manufacturerRepo.save(manufacturer);
     }
 
     @Override
+    @Transactional
     public Manufacturer update(Manufacturer manufacturer) {
-        return null;
+        return manufacturerRepo.save(manufacturer);
     }
 
     @Override
-    public Manufacturer delete(Integer id) {
-        return null;
+    @Transactional
+    public void delete(Integer id) {
+        manufacturerRepo.deleteById(id);
     }
 }

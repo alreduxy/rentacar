@@ -1,15 +1,15 @@
 package com.aaldama.rentacar.controller;
 
-import com.aaldama.rentacar.model.Manufacturer;
 import com.aaldama.rentacar.model.Model;
-import com.aaldama.rentacar.service.ManufacturerService;
 import com.aaldama.rentacar.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/models")
@@ -23,24 +23,45 @@ public class ModelController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Model>> findAll() {
-        return new ResponseEntity<>(modelService.findAll(), HttpStatus.OK);
+    public List<Model> findAll() {
+        return modelService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Model> findById(@PathVariable ("id") Integer id) {
-        return new ResponseEntity<>(modelService.findById(id), HttpStatus.OK);
+    public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {
+        Optional<Model> model = modelService.findById(id);
+        if (model.isPresent()){
+            return ResponseEntity.ok(model.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<Model> save(@RequestBody Model model) {
-        return new ResponseEntity<>(modelService.save(model), HttpStatus.CREATED);
+    public ResponseEntity<?> save(@Valid @RequestBody Model model) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(modelService.save(model));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@Valid @RequestBody Model model, @PathVariable Integer id) {
+        Optional<Model> mo = modelService.findById(id);
+        if (mo.isPresent()) {
+            Model modelDb = mo.get();
+            modelDb.setModelName(model.getModelName());
+            modelDb.setDailyHireRate(model.getDailyHireRate());
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(modelService.save(modelDb));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable ("id") Integer id) {
-        modelService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        Optional<Model> mo = modelService.findById(id);
+        if (mo.isPresent()) {
+            modelService.delete(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

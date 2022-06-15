@@ -4,14 +4,14 @@ import com.aaldama.rentacar.model.Manufacturer;
 import com.aaldama.rentacar.model.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ModelService {
 
-    public List<Model> findAll();
-    public Model findById(Integer id);
-    public Model save(Model model);
-    public void deleteById(Integer id);
-    public Manufacturer findManufacturerById(Integer id);
-    public List<Manufacturer> findAllManufacturers();
-    public Manufacturer saveManufacturer(Manufacturer manufacturer);
+    List<Model> findAll();
+    Optional<Model> findById(Integer id);
+    Model save(Model model);
+    Model update(Model model);
+    void delete(Integer id);
+
 }

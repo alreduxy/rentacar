@@ -6,16 +6,29 @@ import com.aaldama.rentacar.service.RentalStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class RentalStatusServiceImpl implements RentalStatusService {
 
+
+    final private RentalStatusRepo rentalStatusRepo;
+
     @Autowired
-    private RentalStatusRepo rentalStatusRepo;
+    public RentalStatusServiceImpl(RentalStatusRepo rentalStatusRepo) {
+        this.rentalStatusRepo = rentalStatusRepo;
+    }
 
     @Override
-    public RentalStatus findById(Integer id) {
-        return rentalStatusRepo.findById(id).orElse(null);
+    public List<RentalStatus> findAll() {
+        return rentalStatusRepo.findAll();
+    }
+
+    @Override
+    public Optional<RentalStatus> findById(Integer id) {
+        return rentalStatusRepo.findById(id);
     }
 
     @Override
@@ -24,10 +37,12 @@ public class RentalStatusServiceImpl implements RentalStatusService {
     }
 
     @Override
-    public RentalStatus deleteById(Integer id) {
-        rentalStatusRepo.deleteById(id);
-        return null;
+    public RentalStatus update(RentalStatus rentalStatus) {
+        return rentalStatusRepo.save(rentalStatus);
     }
 
-
+    @Override
+    public void delete(Integer id) {
+        rentalStatusRepo.deleteById(id);
+    }
 }

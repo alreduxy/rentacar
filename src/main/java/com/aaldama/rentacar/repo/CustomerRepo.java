@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
-    public List<Customer> findByEmail(String email);
+
 }
 

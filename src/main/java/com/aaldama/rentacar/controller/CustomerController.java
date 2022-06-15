@@ -3,12 +3,15 @@ package com.aaldama.rentacar.controller;
 import com.aaldama.rentacar.exception.ModeloNotFoundException;
 import com.aaldama.rentacar.model.Customer;
 import com.aaldama.rentacar.service.CustomerService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,35 +27,46 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> findAll() {
-        return new ResponseEntity<List<Customer>>(customerService.findAll(), HttpStatus.OK);
+    public List<Customer> findAll() {
+        return customerService.findAll();
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> findById(@PathVariable ("id") Long id) {
-        Optional<Customer> customer = Optional.ofNullable(customerService.findById(id));
-        return customer.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ModeloNotFoundException(HttpStatus.NOT_FOUND, "Customer not found"));
+    public ResponseEntity<?> findById(@Valid @PathVariable Long id) {
+        Optional<Customer> customer = customerService.findById(id);
+        if (customer.isPresent()) {
+            return ResponseEntity.ok(customer.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public Customer save(@RequestBody Customer customer) {
-        return customerService.save(customer);
+    public ResponseEntity<?> save(@Valid @RequestBody Customer customer) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.save(customer));
     }
 
     @PutMapping("/{id}")
-    public Customer update(@RequestBody Customer customer, @PathVariable ("id") Long id) {
-        Customer custom = customerService.findById(id);
-        custom.setEmail(customer.getEmail());
-        return customerService.save(custom);
+    public ResponseEntity<?> update(@Valid @RequestBody Customer customer, @PathVariable Long id) {
+        Optional<Customer> cu = customerService.findById(id);
+        if (cu.isPresent()) {
+            Customer customerDb = cu.get();
+            customerDb.setFirstName(customer.getFirstName());
+            customerDb.setLastName(customer.getLastName());
+            customerDb.setEmail(customer.getEmail());
 
+            return ResponseEntity.status(HttpStatus.CREATED).body(customerService.save(customerDb));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable ("id") Long id) {
-        customerService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        Optional<Customer> cu = customerService.findById(id);
+        if (cu.isPresent()) {
+            customerService.delete(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
-
 }
 

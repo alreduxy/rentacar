@@ -3,12 +3,15 @@ package com.aaldama.rentacar.service;
 import com.aaldama.rentacar.model.RentalStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RentalStatusService  {
 
-    public RentalStatus findById(Integer id);
-    public RentalStatus save(RentalStatus rentalStatus);
-    public RentalStatus deleteById(Integer id);
+    List<RentalStatus> findAll();
+    Optional<RentalStatus> findById(Integer id);
+    RentalStatus save(RentalStatus rentalStatus);
+    RentalStatus update(RentalStatus rentalStatus);
+    void delete(Integer id);
 
 
 }
