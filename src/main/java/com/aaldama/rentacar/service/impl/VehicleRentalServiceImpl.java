@@ -53,7 +53,6 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<RentACarDto> listarVehiculosRentados() {
         List<RentACarDto> listaVehiculos = new ArrayList<>();
         vehicleRentalRepo.listarVehiculosRentados().forEach(x -> {
@@ -78,7 +77,6 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<RentACarDto> listarVehiculosRentadosPorUsuario(Long customer_id) {
         List<RentACarDto> listarPorusuario = new ArrayList<>();
         vehicleRentalRepo.listarVehiculosRentadosPorUsuario(customer_id).forEach(x -> {

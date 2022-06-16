@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/vehicles")
+@RequestMapping("/list-rented")
 public class VehicleRentalsController {
 
     private final VehicleRentalService vehicleRentalService;
@@ -24,19 +24,19 @@ public class VehicleRentalsController {
         this.vehicleRentalService = vehicleRentalService;
     }
 
-    @GetMapping
-    public List<VehicleRental> findAll() {
-        return vehicleRentalService.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {
-        Optional<VehicleRental> vehicleRental = vehicleRentalService.findById(id);
-        if (vehicleRental.isPresent()){
-            return ResponseEntity.ok(vehicleRental.get());
-        }
-        return ResponseEntity.notFound().build();
-    }
+//    @GetMapping
+//    public List<VehicleRental> findAll() {
+//        return vehicleRentalService.findAll();
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {
+//        Optional<VehicleRental> vehicleRental = vehicleRentalService.findById(id);
+//        if (vehicleRental.isPresent()){
+//            return ResponseEntity.ok(vehicleRental.get());
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody VehicleRental vehicleRental) {
@@ -66,18 +66,18 @@ public class VehicleRentalsController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/listar-rentados")
+    @GetMapping()
     public ResponseEntity<List<RentACarDto>> listarVehiculosRentados() {
         List<RentACarDto> lista = new ArrayList<>();
         lista = vehicleRentalService.listarVehiculosRentados();
-        return new ResponseEntity<List<RentACarDto>>(lista, HttpStatus.OK);
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
-    @GetMapping("/listar-rentados/{customer_id}")
-    public ResponseEntity<List<RentACarDto>> listarVehiculosRentadosPorUsuario(@PathVariable ("customer_id") Long customer_id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<List<RentACarDto>> listarVehiculosRentadosPorUsuario(@PathVariable ("id") Long id) {
         List<RentACarDto> lista = new ArrayList<>();
-        lista = vehicleRentalService.listarVehiculosRentadosPorUsuario(customer_id);
-        return new ResponseEntity<List<RentACarDto>>(lista, HttpStatus.OK);
+        lista = vehicleRentalService.listarVehiculosRentadosPorUsuario(id);
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
 
