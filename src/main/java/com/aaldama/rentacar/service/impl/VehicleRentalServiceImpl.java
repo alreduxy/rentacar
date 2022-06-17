@@ -77,9 +77,9 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
     }
 
     @Override
-    public List<RentACarDto> listarVehiculosRentadosPorUsuario(Long customer_id) {
+    public List<RentACarDto> listarVehiculosRentadosPorUsuario(Long user_id) {
         List<RentACarDto> listarPorusuario = new ArrayList<>();
-        vehicleRentalRepo.listarVehiculosRentadosPorUsuario(customer_id).forEach(x -> {
+        vehicleRentalRepo.listarVehiculosRentadosPorUsuario(user_id).forEach(x -> {
             RentACarDto dto = new RentACarDto();
             dto.setFullName(String.valueOf(x[0]));
             dto.setEmail(String.valueOf(x[1]));

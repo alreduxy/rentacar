@@ -5,7 +5,9 @@ import com.aaldama.rentacar.repo.LoginRepo;
 import com.aaldama.rentacar.service.LoginService;
 import com.aaldama.rentacar.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired

@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -24,10 +25,12 @@ public class Location implements Serializable {
     private Integer id;
 
     @NotNull
+    @Size(max = 7, message = "The location code zip must be max 7 characters")
     @Column(name = "location_zip_code")
     private Integer locationCode;
 
     @NotNull
+    @Size(min = 3, max = 50, message = "The location name must be max 50 characters")
     @Column(name = "location_name")
     private String locationName;
 }

@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface VehicleRentalService {
 
     List<VehicleRental> findAll();
-    Optional<VehicleRental> findById(Integer id);
+    Optional<VehicleRental> findById(Integer vehicleRentalId);
     VehicleRental save(VehicleRental vehicleRental);
     VehicleRental update(VehicleRental vehicleRental);
     void delete(Integer id);
     List<RentACarDto> listarVehiculosRentados();
-    List<RentACarDto> listarVehiculosRentadosPorUsuario(Long customer_id);
+    List<RentACarDto> listarVehiculosRentadosPorUsuario(Long user_id);
 
 }

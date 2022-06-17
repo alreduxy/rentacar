@@ -32,7 +32,7 @@ public class ResetToken {
         this.expiryDate = expiryDate;
     }
 
-    public void setExpiryDaten(int minutes) {
+    public void setExpiryDate(int minutes) {
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime exp = today.plusMinutes(minutes);
         this.expiryDate = exp;

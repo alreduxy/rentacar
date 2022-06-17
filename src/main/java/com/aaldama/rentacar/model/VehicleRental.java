@@ -41,9 +41,9 @@ public class VehicleRental implements Serializable {
         this.dateTo = new Date();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false, foreignKey = @ForeignKey(name = "fk_vehicle_rental_customer"))
-    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_user_id"))
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="rental_status_id", nullable=false, foreignKey = @ForeignKey(name = "fk_rental_status_id"))

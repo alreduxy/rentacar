@@ -19,7 +19,7 @@ public class Menu implements Serializable {
 
     @Id
     @Column(name = "menu_id")
-    private Integer idMenu;
+    private Integer id;
 
     @Column(length = 20)
     private String name;

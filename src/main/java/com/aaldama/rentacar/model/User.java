@@ -1,5 +1,6 @@
 package com.aaldama.rentacar.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -59,6 +61,24 @@ public class User implements Serializable {
     @Email
     @Column(unique = true)
     private String email;
+
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @NotNull(message = "It cant be empty")
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
+
+    @JsonIgnoreProperties(value={"user", "hibernateLazyInitializer", "handler"}, allowSetters=true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<VehicleRental> vehicleRentals;
+
+    public User() {
+        this.vehicleRentals = new ArrayList<>();
+    }
+
+    @PrePersist
+    public void prePersist() { this.createAt = new Date();}
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
