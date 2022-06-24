@@ -1,5 +1,6 @@
 package com.aaldama.rentacar.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ValidationException;
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 
 @RestController
@@ -42,6 +45,17 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<Object>(er, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final ResponseEntity<ExceptionResponse> manejarValidacionDataIntegrityViolationException(Exception ex, WebRequest request) {
+        ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<ExceptionResponse>(er, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public final ResponseEntity<ExceptionResponse> manejarValidacionExcepciones(Exception ex, WebRequest request) {
+        ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<ExceptionResponse>(er, HttpStatus.BAD_REQUEST);
+    }
 
 }
 

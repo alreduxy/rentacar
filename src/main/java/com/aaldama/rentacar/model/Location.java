@@ -1,7 +1,10 @@
 package com.aaldama.rentacar.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -14,6 +17,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "locations")
+@ApiModel(description = "Information about the location")
 public class Location implements Serializable {
 
     @Serial
@@ -21,15 +25,17 @@ public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Autoincrement id of the location")
     @Column(name = "location_id")
-    private Integer id;
+    private Integer idLocation;
 
     @NotNull
-    @Size(max = 7, message = "The location code zip must be max 7 characters")
+    @ApiModelProperty(notes = "Zip code number", example = "8320000")
     @Column(name = "location_zip_code")
     private Integer locationCode;
 
     @NotNull
+    @ApiModelProperty(notes = "Location name", example = "Valdivia")
     @Size(min = 3, max = 50, message = "The location name must be max 50 characters")
     @Column(name = "location_name")
     private String locationName;

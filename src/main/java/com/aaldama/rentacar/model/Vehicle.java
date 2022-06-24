@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 @Getter
@@ -24,29 +25,45 @@ public class Vehicle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_id")
-    private Integer id;
+    private Integer idVehicle;
 
     @NotNull
     @Column(name = "current_km")
     private Integer currentKilometers;
 
+//    @NotNull
+//    @JsonFormat(pattern="dd-MM-yyyy")
+//    @Temporal(TemporalType.DATE)
+//    @Column(name = "due_date")
+//    private Date dateMotDue;
+//
+//    @PrePersist
+//    public void prePersist() { this.dateMotDue = new Date();
+//    }
+
     @NotNull
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "due_date")
-    private Date dateMotDue;
+    @Column(name = "daily_price")
+    private Long dailyHireRate;
+
+    @NotNull
+    @Column(name = "plate_number")
+    private String plate;
+
+    @NotNull
+    @Column(name = "color")
+    private String color;
 
     @NotNull
     @Column(name = "full_tank")
     private Boolean fullTank;
 
-    @PrePersist
-    public void prePersist() { this.dateMotDue = new Date();
-    }
+    @Column(name = "vehicle_stock")
+    private Integer stock;
 
-    @NotNull
-    @Column(name = "engine_size")
-    private Double engineSize;
+
+    @ManyToOne
+    @JoinColumn(name="rental_status_id", nullable=false, foreignKey = @ForeignKey(name = "fk_rental_status_id"))
+    private RentalStatus rentalStatus;
 
     @ManyToOne
     @JoinColumn(name="location_id", nullable=false, foreignKey = @ForeignKey(name = "fk_location_id"))

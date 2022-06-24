@@ -47,7 +47,6 @@ public class ModelController {
         if (mo.isPresent()) {
             Model modelDb = mo.get();
             modelDb.setModelName(model.getModelName());
-            modelDb.setDailyHireRate(model.getDailyHireRate());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(modelService.save(modelDb));
         }
@@ -55,7 +54,7 @@ public class ModelController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteById(@PathVariable Integer id) {
         Optional<Model> mo = modelService.findById(id);
         if (mo.isPresent()) {
             modelService.delete(id);

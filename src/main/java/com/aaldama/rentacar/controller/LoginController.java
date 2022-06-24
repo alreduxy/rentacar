@@ -38,7 +38,7 @@ public class LoginController {
         int rpta = 0;
         try {
             User us = service.verificarNombreUsuario(correo);
-            if (us != null && us.getId() > 0) {
+            if (us != null && us.getIdUser() > 0) {
 
                 ResetToken token = new ResetToken();
                 token.setToken(UUID.randomUUID().toString());
@@ -71,7 +71,7 @@ public class LoginController {
         try {
             if (token != null && !token.isEmpty()) {
                 ResetToken rt = tokenService.findByToken(token);
-                if (rt != null && rt.getId() > 0) {
+                if (rt != null && rt.getIdResetToken() > 0) {
                     if (!rt.isExpiryDate()) {
                         rpta = 1;
                     }

@@ -19,7 +19,7 @@ public class Menu implements Serializable {
 
     @Id
     @Column(name = "menu_id")
-    private Integer id;
+    private Integer idMenu;
 
     @Column(length = 20)
     private String name;
@@ -33,7 +33,7 @@ public class Menu implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "menu_rol"
             , joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "menu_id")
-            , inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "rol_id"))
+            , inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private List<Role> roles;
 }
 

@@ -1,5 +1,6 @@
 package com.aaldama.rentacar.controller;
 
+import com.aaldama.rentacar.model.RentalStatus;
 import com.aaldama.rentacar.model.Vehicle;
 import com.aaldama.rentacar.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,9 @@ public class VehicleController {
 
     @GetMapping
     public List<Vehicle> findAll() {
-        return vehicleService.findAll();
+        return vehicleService.findAll()
+                .stream()
+                .filter(vehicle -> vehicle.getRentalStatus().getIdRentalStatus().equals(RentalStatus.AVAILABLE)).toList();
     }
 
     @GetMapping("/{id}")
@@ -47,9 +50,10 @@ public class VehicleController {
         if (ve.isPresent()) {
             Vehicle vehicleDb = ve.get();
             vehicleDb.setCurrentKilometers(vehicle.getCurrentKilometers());
-            vehicleDb.setDateMotDue(vehicle.getDateMotDue());
+            vehicleDb.setPlate(vehicle.getPlate());
+            vehicleDb.setColor(vehicle.getColor());
             vehicleDb.setFullTank(vehicle.getFullTank());
-            vehicleDb.setFullTank(vehicle.getFullTank());
+            vehicleDb.setModel(vehicle.getModel());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(vehicleService.save(vehicleDb));
         }

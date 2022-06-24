@@ -19,7 +19,7 @@ public class VehicleType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_type_id")
-    private Integer id;
+    private Integer idVehicleType;
 
     @Column(name = "vehicle_type_desc")
     private String vehicleTypeDescription;

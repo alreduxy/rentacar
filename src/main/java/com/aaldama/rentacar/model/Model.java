@@ -21,15 +21,11 @@ public class Model implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "model_id")
-    private Integer id;
+    private Integer idModel;
 
     @NotNull
     @Column(name = "model_name")
     private String modelName;
-
-    @NotNull
-    @Column(name = "daily_price")
-    private Long dailyHireRate;
 
     @JsonIgnoreProperties(value={"manufacturer", "hibernateLazyInitializer", "handler"}, allowSetters=true)
     @ManyToOne

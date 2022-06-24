@@ -8,24 +8,27 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class RentACarDto implements Serializable {
+public class VehicleRentalDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 2722897638402547421L;
 
-    private Integer vehicleRentalId;
+    private Integer idVehicleRental;
     private String fullName;
     private String email;
+    private String phone;
     private String locationName;
     private String vehicleTypeDescription;
     private String modelName;
     private Long dailyHireRate;
     private String manufacturerName;
     private Integer currentKilometers;
+    private String plate;
+    private String color;
     private String dateFrom;
     private String dateTo;
     private Integer quantityDays;
-    private Long totalPrice;
+    private Integer totalPrice;
 
 }
 

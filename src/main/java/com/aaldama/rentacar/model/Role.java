@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role implements Serializable {
 
     @Serial
@@ -19,8 +19,8 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rol_id")
-    private Long id;
+    @Column(name = "role_id")
+    private Integer idRole;
 
     @NotNull
     @Column(unique = true, length = 20)

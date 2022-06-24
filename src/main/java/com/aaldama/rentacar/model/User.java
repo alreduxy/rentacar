@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serial;
@@ -31,7 +32,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Integer idUser;
 
     @Column(unique = true, length = 20)
     private String username;
@@ -58,7 +59,12 @@ public class User implements Serializable {
     @Column(name = "last_name", length = 50)
     private String lastName;
 
+    @NotNull
+    @Column(name = "phone", length = 9)
+    private String phone;
+
     @Email
+    @NotEmpty
     @Column(unique = true)
     private String email;
 

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MenuRepo extends JpaRepository<Menu, Integer> {
 
-    @Query(value = "select m.* from menu_rol mr inner join users_roles ur on ur.rol_id = mr.rol_id inner join " +
+    @Query(value = "select m.* from menu_rol mr inner join users_roles ur on ur.role_id = mr.role_id inner join " +
             "menu m on m.menu_id = mr.menu_id inner join user u on u.user_id = ur.user_id where u.username = :username", nativeQuery = true)
     List<Object[]> listarMenuPorUsuario(@Param("username") String username);
 

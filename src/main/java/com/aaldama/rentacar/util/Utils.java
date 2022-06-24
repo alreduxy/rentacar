@@ -1,6 +1,8 @@
 package com.aaldama.rentacar.util;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -25,5 +27,13 @@ public class Utils {
     public static String encriptarClave(String clave) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder.encode(clave);
+    }
+
+    public static Long getQuantityDays(LocalDate dateFrom, LocalDate dateTo) {
+        return  ChronoUnit.DAYS.between(dateFrom, dateTo);
+    }
+
+    public static Long getTotalPrice(Long days, Long price) {
+        return days * price;
     }
 }

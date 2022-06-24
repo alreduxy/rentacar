@@ -1,28 +1,30 @@
 package com.aaldama.rentacar.controller;
 
-import com.aaldama.rentacar.dto.RentACarDto;
+import com.aaldama.rentacar.dto.VehicleRentalDTO;
 import com.aaldama.rentacar.model.VehicleRental;
+import com.aaldama.rentacar.service.UserService;
 import com.aaldama.rentacar.service.VehicleRentalService;
+import com.aaldama.rentacar.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/list-rented")
+@RequestMapping("/vehicle-rented")
 public class VehicleRentalsController {
-
-    private final VehicleRentalService vehicleRentalService;
+    @Autowired
+    VehicleRentalService vehicleRentalService;
 
     @Autowired
-    public VehicleRentalsController(VehicleRentalService vehicleRentalService) {
-        this.vehicleRentalService = vehicleRentalService;
-    }
+    VehicleService vehicleService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping
     public List<VehicleRental> findAll() {
@@ -39,22 +41,11 @@ public class VehicleRentalsController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody VehicleRental vehicleRental) {
+    public ResponseEntity<?> save(@Valid @RequestBody VehicleRental vehicleRental) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(vehicleRentalService.save(vehicleRental));
+
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody VehicleRental vehicleRental, @PathVariable Integer id) {
-        Optional<VehicleRental> vr = vehicleRentalService.findById(id);
-        if (vr.isPresent()) {
-            VehicleRental vehicleRentalDb = vr.get();
-            vehicleRentalDb.setDateFrom(vehicleRental.getDateFrom());
-            vehicleRentalDb.setDateTo(vehicleRental.getDateTo());
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(vehicleRentalService.save(vehicleRentalDb));
-        }
-        return ResponseEntity.notFound().build();
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
@@ -66,18 +57,14 @@ public class VehicleRentalsController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/listar-vehiculos-rentados")
-    public ResponseEntity<List<RentACarDto>> listarVehiculosRentados() {
-        List<RentACarDto> lista = new ArrayList<>();
-        lista = vehicleRentalService.listarVehiculosRentados();
-        return new ResponseEntity<>(lista, HttpStatus.OK);
-    }
-
-    @GetMapping("/listar-por-usuario/{id}")
-    public ResponseEntity<List<RentACarDto>> listarVehiculosRentadosPorUsuario(@PathVariable ("id") Long id) {
-        List<RentACarDto> lista = new ArrayList<>();
-        lista = vehicleRentalService.listarVehiculosRentadosPorUsuario(id);
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+    @GetMapping("/rentados/{id}")
+    public ResponseEntity<List<VehicleRentalDTO>> listVehicleByUserId(@PathVariable ("id") Integer idUser) {
+        Optional<VehicleRental> vr = vehicleRentalService.findById(idUser);
+        if (vr.isPresent()) {
+            List<VehicleRentalDTO> vrdto = vehicleRentalService.listVehicleByUserId(idUser);
+            return ResponseEntity.ok(vehicleRentalService.listVehicleByUserId(idUser));
+            }
+        return ResponseEntity.notFound().build();
     }
 
 

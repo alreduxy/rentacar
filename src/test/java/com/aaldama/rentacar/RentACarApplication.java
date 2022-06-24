@@ -12,23 +12,24 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @Configuration
-public class RentACarApplication implements CommandLineRunner{
+public class RentACarApplication{
 
-    @Autowired
-    private BCryptPasswordEncoder bcrypt;
+//    @Autowired
+//    private BCryptPasswordEncoder bcrypt;
 
 
     public static void main(String[] args) {
         SpringApplication.run(RentACarApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        String password = "123456";
-        for (int i = 0; i < 4; i++) {
-            String passwordEncoded = bcrypt.encode(password);
-            System.out.println(bcrypt.encode(password));
-        }
-    }
+    //constraseña a modo de prueba para el usuario admin
+//    @Override
+//    public void run(String... args) throws Exception {
+//        String password = "123456";
+//        for (int i = 0; i < 4; i++) {
+//            String passwordEncoded = bcrypt.encode(password);
+//            System.out.println(bcrypt.encode(password));
+//        }
+//    }
 
 }

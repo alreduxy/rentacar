@@ -1,5 +1,6 @@
 package com.aaldama.rentacar.service.impl;
 
+import com.aaldama.rentacar.dto.UserDTO;
 import com.aaldama.rentacar.model.User;
 import com.aaldama.rentacar.repo.RoleRepo;
 import com.aaldama.rentacar.repo.UserRepo;
@@ -13,7 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,8 +36,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User findById(Long id) {
+    public User findById(Integer id) {
         return userRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepo.findByEmail(email);
     }
 
     @Override
@@ -48,7 +56,23 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public List<UserDTO> listUserByUserId(int idUser) {
+        List<UserDTO> listById = new ArrayList<>();
+        userRepo.listUserById(idUser).forEach(u -> {
+            UserDTO us = new UserDTO();
+            us.setUsername(String.valueOf(u[0]));
+            us.setFullName(String.valueOf(u[1]));
+            us.setEmail(String.valueOf(u[2]));
+            us.setPhone(String.valueOf(u[3]));
+            us.setCreateAt(String.valueOf(u[4]));
+
+            listById.add(us);
+        });
+        return listById;
+    }
+
+    @Override
+    public void deleteById(Integer id) {
         userRepo.deleteById(id);
     }
 

@@ -10,6 +10,7 @@ public class ModeloNotFoundException extends RuntimeException{
     public ModeloNotFoundException(int notFound, String message) {
         super(message);
     }
+
 }
 
 

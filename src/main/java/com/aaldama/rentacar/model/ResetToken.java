@@ -13,7 +13,7 @@ public class ResetToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idResetToken;
 
     @Column(nullable = false, unique = false)
     private String token;

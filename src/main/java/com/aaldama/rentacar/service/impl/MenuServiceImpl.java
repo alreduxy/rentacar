@@ -21,7 +21,7 @@ public class MenuServiceImpl implements MenuService {
         List<Menu> menus = new ArrayList<>();
         menuRepo.listarMenuPorUsuario(nombre).forEach(x -> {
             Menu m = new Menu();
-            m.setId((Integer.parseInt(String.valueOf(x[0]))));
+            m.setIdMenu((Integer.parseInt(String.valueOf(x[0]))));
             m.setIcon(String.valueOf(x[1]));
             m.setName(String.valueOf(x[2]));
             m.setUrl(String.valueOf(x[3]));

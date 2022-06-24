@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RentalStatusRepo extends JpaRepository<RentalStatus, Integer> {
 
+
+
 }
 

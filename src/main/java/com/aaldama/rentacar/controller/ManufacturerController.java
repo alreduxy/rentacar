@@ -56,7 +56,7 @@ public class ManufacturerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteById(@PathVariable Integer id) {
         Optional<Manufacturer> ma = manufacturerService.findById(id);
         if (ma.isPresent()) {
             manufacturerService.delete(id);

@@ -4,6 +4,7 @@ import com.aaldama.rentacar.model.RentalStatus;
 import com.aaldama.rentacar.repo.RentalStatusRepo;
 import com.aaldama.rentacar.service.RentalStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,9 +28,10 @@ public class RentalStatusServiceImpl implements RentalStatusService {
     }
 
     @Override
-    public Optional<RentalStatus> findById(Integer id) {
+    public Optional<RentalStatus> findById(Integer id){
         return rentalStatusRepo.findById(id);
     }
+
 
     @Override
     public RentalStatus save(RentalStatus rentalStatus) {

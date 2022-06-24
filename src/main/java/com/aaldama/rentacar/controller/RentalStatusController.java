@@ -46,7 +46,7 @@ public class RentalStatusController {
         Optional<RentalStatus> rs = rentalStatusService.findById(id);
         if (rs.isPresent()){
             RentalStatus rentalStatusDb = rs.get();
-            rentalStatusDb.setRentalStatusDescription(rentalStatus.getRentalStatusDescription());
+            rentalStatusDb.setName(rentalStatus.getName());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(rentalStatusService.save(rentalStatusDb));
         }
@@ -54,7 +54,7 @@ public class RentalStatusController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteById(@PathVariable Integer id) {
         Optional<RentalStatus> rs = rentalStatusService.findById(id);
         if (rs.isPresent()){
             rentalStatusService.delete(id);

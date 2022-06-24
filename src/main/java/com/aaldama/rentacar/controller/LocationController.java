@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/locations")
+@RequestMapping("/location")
 public class LocationController {
 
     private final LocationService locationService;
@@ -56,7 +56,7 @@ public class LocationController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteById(@PathVariable ("id") Integer id) {
         Optional<Location> lo = locationService.findById(id);
         if (lo.isPresent()){
             locationService.delete(id);
