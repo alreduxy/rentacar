@@ -51,7 +51,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private BCryptPasswordEncoder bcrypt;
+    private transient BCryptPasswordEncoder bcrypt;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {

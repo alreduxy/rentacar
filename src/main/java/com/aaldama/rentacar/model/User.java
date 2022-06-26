@@ -41,15 +41,15 @@ public class User implements Serializable {
     private String password;
 
     public Boolean getEnabled() {
-        return enabled;
+        return isEnabled;
     }
 
     public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+        this.isEnabled = enabled;
     }
 
-    @Column(name = "enabled", nullable = false)
-    private Boolean enabled;
+    @Column(name = "enabled", nullable = true)
+    private Boolean isEnabled;
 
     @NotNull
     @Column(name = "first_name", length = 50)

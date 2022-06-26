@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/manufacturers")
+@RequestMapping("/manufacturer")
 public class ManufacturerController {
 
     private final ManufacturerService manufacturerService;

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -27,8 +27,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = "Obtener todos los Usuario existentes",
-            notes = "No necesita parametros de entrada",
+    @ApiOperation(value = "Get all existing User",
+            notes = "No need input parameters",
             response = List.class,
             responseContainer = "Usuario")
     @ApiResponses(value = {
@@ -41,8 +41,8 @@ public class UserController {
         return userService.findAll();
     }
 
-    @ApiOperation(value = "Obtener Usuario existente por Id",
-            notes = "Se necesita el id del Usuario como parametros de entrada",
+    @ApiOperation(value = "Get Existing User by Id",
+            notes = "User id is needed as input parameters",
             response = User.class,
             responseContainer = "Usuario")
     @ApiResponses(value = {
@@ -60,8 +60,8 @@ public class UserController {
 
     }
 
-    @ApiOperation(value = "Crea un nuevo Usuario",
-            notes = "Se necesitan los parametros del Usuario",
+    @ApiOperation(value = "Create a new User",
+            notes = "User parameters are needed to create a new User",
             response = User.class,
             responseContainer = "Usuario")
     @ApiResponses(value = {
@@ -76,12 +76,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
-   @ApiOperation(value = "Actualiza una Usuario existente en el sistema",
-            notes = "Se necesitan los parametros del Usuario",
+   @ApiOperation(value = "Is updated an existing Usuario",
+            notes = "We need the id of the Usuario and the new values",
             response = User.class,
             responseContainer = "Usuario")
     @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "BAD REQUEST"),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 200, message = "The request has succeeded")})
     @PutMapping
@@ -91,8 +91,8 @@ public class UserController {
 
 
 
-@ApiOperation(value = "Elimina un usuario del sistema",
-        notes = "Se necesita el id del Usuario como parametros de entrada",
+@ApiOperation(value = "Delete a user from the system",
+        notes = "User id is needed as input parameters",
         response = String.class,
         responseContainer = "Usuario")
 @ApiResponses(value = {
@@ -108,7 +108,14 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
-
+    @ApiOperation(value = "Show a especific user by id",
+            notes = "User id is needed as input parameters",
+            response = String.class,
+            responseContainer = "Usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not found"),
+            @ApiResponse(code = 200, message = "The request has succeeded")})
     @GetMapping("/resume/{id}")
     public ResponseEntity<List<UserDTO>> listUserByUserId(@PathVariable("id") int idUser) {
         Optional<User> us = Optional.ofNullable(userService.findById(idUser));

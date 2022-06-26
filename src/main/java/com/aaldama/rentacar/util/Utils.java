@@ -29,8 +29,8 @@ public class Utils {
         return bCryptPasswordEncoder.encode(clave);
     }
 
-    public static Long getQuantityDays(LocalDate dateFrom, LocalDate dateTo) {
-        return  ChronoUnit.DAYS.between(dateFrom, dateTo);
+    public static Long getQuantityDays(LocalDate as, LocalDate we) {
+        return  ChronoUnit.DAYS.between(as, we);
     }
 
     public static Long getTotalPrice(Long days, Long price) {

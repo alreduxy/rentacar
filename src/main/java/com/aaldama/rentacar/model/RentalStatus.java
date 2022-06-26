@@ -18,7 +18,6 @@ public class RentalStatus implements Serializable {
 
     public static final int AVAILABLE = 1;
     public static final int NOT_AVAILABLE = 2;
-    public static final int IN_MANTEINANCE = 3;
 
     @Serial
     private static final long serialVersionUID = -2056024356819560776L;

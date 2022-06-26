@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/models")
+@RequestMapping("/model")
 public class ModelController {
 
     private final ModelService modelService;

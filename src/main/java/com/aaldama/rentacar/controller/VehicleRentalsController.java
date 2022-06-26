@@ -68,4 +68,17 @@ public class VehicleRentalsController {
     }
 
 
+    /*{
+    "dateFrom": "22-06-2022",
+    "dateTo": "30-06-2022",
+    "user": {
+        "idUser": 1
+    },
+    "vehicle": {
+        "idVehicle": 2
+    }
+}
+     */
+
+
 }

@@ -83,7 +83,7 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
         VehicleRental vehicleRentalNuevo = vehicleRentalRepo.save(vehicleRental);
 
         if(vehicleRentalNuevo.getIdVehicleRental()!=0){
-            RentalStatus rentalStatus = rentalStatusRepo.findById(RentalStatus.NOT_AVAILABLE).orElse(null);
+            RentalStatus rentalStatus = rentalStatusRepo.getById(RentalStatus.NOT_AVAILABLE);
             vehicle.setRentalStatus(rentalStatus);
             updateVehicle(vehicle);
         }

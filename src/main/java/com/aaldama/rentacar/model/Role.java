@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role implements Serializable {
 
     @Serial
