@@ -1,6 +1,5 @@
 package com.aaldama.rentacar.util;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
