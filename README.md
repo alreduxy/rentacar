@@ -1,8 +1,9 @@
 # rentacar
 RentaCar fue un proyecto realizado para obtener una certificación en Spring Boot en Escalab Academy -> https://escalab.academy/spring-boot.html 
-el proyecto consistio en crear un sistema de arriendo de vehículos en diferentes sucursales, definiendo el tipo de vehículo, el tiempo de 
-arrendamiento, calculando su importe por días y un total a pagar. Si un vehiculo estaba arrendado, este, ya no estaba disponible
+El proyecto final, de temática libre, cree un sistema de arriendo de vehículos, en diferentes sucursales, definiendo el tipo de vehículo, marca, modelo, opciones,
+el tiempo de arrendamiento, calculando su importe por días y un total a pagar. Si un vehiculo estaba arrendado, este, ya no estaba disponible
 hasta su devolución. No hice un front porque no lo pedían. Todas las APIRest las consulte usando Postman.
+
 Obviamente me gustaría terminarlo algún dia con un front end. La duración del curso fue de 12 clases sincronas de 2:30hras de duración aproximadamente. 
 Esta certificación comprendio los siguiente tópicos.
 ![cronograma-spring](https://user-images.githubusercontent.com/82774845/185438844-76c9c794-1980-42cd-acc6-12e3999ec0e0.png)
