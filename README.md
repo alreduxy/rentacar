@@ -6,7 +6,6 @@ hasta su devolución. No hice un front porque no lo pedían. Todas las APIRest l
 
 Obviamente me gustaría terminarlo algún dia con un front end. La duración del curso fue de 12 clases sincronas de 2:30hras de duración aproximadamente. 
 Esta certificación comprendio los siguiente tópicos.
-![cronograma-spring](https://user-images.githubusercontent.com/82774845/185438844-76c9c794-1980-42cd-acc6-12e3999ec0e0.png)
 
 Objetivos del Curso Spring Boot
 
